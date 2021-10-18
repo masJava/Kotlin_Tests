@@ -1,5 +1,5 @@
 package com.geekbrains.tests.presenter
 
-internal interface PresenterContract {
-    fun searchGitHub(searchQuery: String)
-}
+import com.geekbrains.tests.view.ViewContract
+
+internal interface PresenterContract {}
