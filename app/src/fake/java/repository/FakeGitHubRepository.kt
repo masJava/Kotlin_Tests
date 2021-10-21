@@ -1,7 +1,8 @@
-package com.geekbrains.tests.repository
+package repository
 
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.presenter.RepositoryContract
+import com.geekbrains.tests.repository.RepositoryCallback
 import retrofit2.Response
 
 internal class FakeGitHubRepository : RepositoryContract {
@@ -10,6 +11,6 @@ internal class FakeGitHubRepository : RepositoryContract {
         query: String,
         callback: RepositoryCallback
     ) {
-        callback.handleGitHubResponse(Response.success(SearchResponse(42, listOf())))
+        callback.handleGitHubResponse(Response.success(SearchResponse(404, listOf())))
     }
 }
