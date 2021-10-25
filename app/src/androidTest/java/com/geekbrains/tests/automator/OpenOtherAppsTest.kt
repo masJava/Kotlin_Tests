@@ -43,7 +43,7 @@ class OpenOtherAppsTest {
         //Приложений, обычно, установлено столько, что кнопка может быть за границей экрана
         //Тогда корневым контейнером будет Scrollable.
         //Если же все приложения умещаются на одном экране, то достаточно установить scrollable(false)
-        val appViews = UiScrollable(UiSelector().scrollable(true))
+        val appViews = UiScrollable(UiSelector().scrollable(false))
         //Если прокрутка горизонтальная (встречается на старых устройствах), нужно установить
         // горизонтальную прокрутку (по умолчанию она вертикальная)
         //appViews.setAsHorizontalList()
