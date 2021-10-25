@@ -16,6 +16,7 @@ import com.geekbrains.tests.view.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class MainActivity : AppCompatActivity(), ViewSearchContract {
 
@@ -33,6 +34,9 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
         }
+        findButton.setOnClickListener {
+            setQuery()
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -45,21 +49,25 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     private fun setQueryListener() {
         searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val query = searchEditText.text.toString()
-                if (query.isNotBlank()) {
-                    presenter.searchGitHub(query)
-                    return@OnEditorActionListener true
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.enter_search_word),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@OnEditorActionListener false
-                }
+                return@OnEditorActionListener setQuery()
             }
             false
         })
+    }
+
+    private fun setQuery(): Boolean {
+        val query = searchEditText.text.toString()
+        if (query.isNotBlank()) {
+            presenter.searchGitHub(query)
+            return true
+        } else {
+            Toast.makeText(
+                this@MainActivity,
+                getString(R.string.enter_search_word),
+                Toast.LENGTH_SHORT
+            ).show()
+            return false
+        }
     }
 
     private fun createRepository(): GitHubRepository {
@@ -79,6 +87,8 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     ) {
         this.totalCount = totalCount
         adapter.updateResults(searchResults)
+        totalCountTextView.text =
+            String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
     }
 
     override fun displayError() {

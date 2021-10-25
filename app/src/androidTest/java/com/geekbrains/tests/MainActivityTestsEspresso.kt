@@ -1,3 +1,5 @@
+package com.geekbrains.tests
+
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,7 +11,6 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.geekbrains.tests.R
 import com.geekbrains.tests.view.search.MainActivity
 import junit.framework.TestCase
 import org.junit.After
