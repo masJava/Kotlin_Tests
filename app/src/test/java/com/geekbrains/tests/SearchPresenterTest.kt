@@ -87,7 +87,7 @@ class SearchPresenterTest {
 
         //Убеждаемся, что вызывается верный метод: viewContract.displayError("Response is null or unsuccessful"), и что он вызывается единожды
         verify(viewContract, times(1))
-            .displayError("Response is null or unsuccessful")
+            .displayError(TEST_RESPONSE_NULL)
     }
 
     @Test //Проверим порядок вызова методов viewContract
@@ -100,7 +100,7 @@ class SearchPresenterTest {
         val inOrder = inOrder(viewContract)
         //Прописываем порядок вызова методов
         inOrder.verify(viewContract).displayLoading(false)
-        inOrder.verify(viewContract).displayError("Response is null or unsuccessful")
+        inOrder.verify(viewContract).displayError(TEST_RESPONSE_NULL)
     }
 
     @Test //Проверим пустой ответ сервера
