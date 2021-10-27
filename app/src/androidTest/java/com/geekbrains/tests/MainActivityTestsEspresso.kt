@@ -96,7 +96,7 @@ class MainActivityTestsEspresso {
         onView(withId(R.id.searchEditText)).perform(click())
         onView(withId(R.id.searchEditText)).perform(replaceText(str), closeSoftKeyboard())
         onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
-        val assertion: ViewAssertion = matches(withText("Number of results: 404"))
+        val assertion: ViewAssertion = matches(withText(TEST_NUMBER_OF_RESULTS_FAKE_404))
         onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 

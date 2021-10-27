@@ -48,7 +48,7 @@ class DetailsActivityEspressoTests {
 
     @Test
     fun activityTextView_HasText() {
-        val assertion: ViewAssertion = matches(withText("Number of results: 0"))
+        val assertion: ViewAssertion = matches(withText(TEST_NUMBER_OF_RESULTS_ZERO))
         onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 

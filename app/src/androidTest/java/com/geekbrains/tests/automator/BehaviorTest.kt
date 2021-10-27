@@ -9,6 +9,12 @@ import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
+import com.geekbrains.tests.*
+import com.geekbrains.tests.TEST_ID_FIND_BUTTON
+import com.geekbrains.tests.TEST_ID_SEARCH_EDIT_TEXT
+import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_FAKE_404
+import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_FAKE_MINUS_1
+import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_FAKE_PLUS_1
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -49,7 +55,7 @@ class BehaviorTest {
     @Test
     fun test_MainActivityIsStarted() {
         //Через uiDevice находим editText
-        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        val editText = uiDevice.findObject(By.res(packageName, TEST_ID_SEARCH_EDIT_TEXT))
         //Проверяем на null
         Assert.assertNotNull(editText)
     }
@@ -58,12 +64,12 @@ class BehaviorTest {
     @Test
     fun test_SearchIsPositive() {
         //Через uiDevice находим editText
-        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        val editText = uiDevice.findObject(By.res(packageName, TEST_ID_SEARCH_EDIT_TEXT))
         //Устанавливаем значение
         editText.text = "UiAutomator"
 
         //click findButton
-        val findButton = uiDevice.findObject(By.res(packageName, "findButton"))
+        val findButton = uiDevice.findObject(By.res(packageName, TEST_ID_FIND_BUTTON))
         findButton.click()
 
         //Ожидаем конкретного события: появления текстового поля totalCountTextView.
@@ -75,47 +81,47 @@ class BehaviorTest {
             )
         //Убеждаемся, что сервер вернул корректный результат. Обратите внимание, что количество
         //результатов может варьироваться во времени, потому что количество репозиториев постоянно меняется.
-        Assert.assertEquals(changedText.text.toString(), "Number of results: 404")
+        Assert.assertEquals(changedText.text.toString(), TEST_NUMBER_OF_RESULTS_FAKE_404)
     }
 
     @Test
     fun test_OpenDetailsScreen() {
 
-        uiDevice.findObject(By.res(packageName, "searchEditText")).text = "Ui"
-        uiDevice.findObject(By.res(packageName, "findButton")).click()
-        uiDevice.findObject(By.res(packageName, "toDetailsActivityButton")).click()
+        uiDevice.findObject(By.res(packageName, TEST_ID_SEARCH_EDIT_TEXT)).text = "Ui"
+        uiDevice.findObject(By.res(packageName, TEST_ID_FIND_BUTTON)).click()
+        uiDevice.findObject(By.res(packageName, TEST_ID_DETAILS_ACTIVITY_BUTTON)).click()
 
         val changedText =
             uiDevice.wait(
-                Until.findObject(By.res(packageName, "totalCountDetailsTextView")),
+                Until.findObject(By.res(packageName, TEST_ID_TOTAL_COUNT_DETAILS_TEXTVIEW)),
                 TIMEOUT
             )
 
-        Assert.assertEquals(changedText.text, "Number of results: 404")
+        Assert.assertEquals(changedText.text, TEST_NUMBER_OF_RESULTS_FAKE_404)
     }
 
     @Test
     fun test_detailsScreenDecrementButtonTest() {
 
-        uiDevice.findObject(By.res(packageName, "searchEditText")).text = "Ui"
-        uiDevice.findObject(By.res(packageName, "findButton")).click()
-        uiDevice.findObject(By.res(packageName, "toDetailsActivityButton")).click()
+        uiDevice.findObject(By.res(packageName, TEST_ID_SEARCH_EDIT_TEXT)).text = "Ui"
+        uiDevice.findObject(By.res(packageName, TEST_ID_FIND_BUTTON)).click()
+        uiDevice.findObject(By.res(packageName, TEST_ID_DETAILS_ACTIVITY_BUTTON)).click()
         uiDevice.wait(Until.findObject(By.res(packageName, "decrementButton")), TIMEOUT).click()
 
-        val changedText = uiDevice.findObject(By.res(packageName, "totalCountDetailsTextView"))
-        Assert.assertEquals(changedText.text, "Number of results: 403")
+        val changedText = uiDevice.findObject(By.res(packageName, TEST_ID_TOTAL_COUNT_DETAILS_TEXTVIEW))
+        Assert.assertEquals(changedText.text, TEST_NUMBER_OF_RESULTS_FAKE_MINUS_1)
     }
 
     @Test
     fun test_detailsScreenIncrementButtonTest() {
 
-        uiDevice.findObject(By.res(packageName, "searchEditText")).text = "Ui"
-        uiDevice.findObject(By.res(packageName, "findButton")).click()
-        uiDevice.findObject(By.res(packageName, "toDetailsActivityButton")).click()
+        uiDevice.findObject(By.res(packageName, TEST_ID_SEARCH_EDIT_TEXT)).text = "Ui"
+        uiDevice.findObject(By.res(packageName, TEST_ID_FIND_BUTTON)).click()
+        uiDevice.findObject(By.res(packageName, TEST_ID_DETAILS_ACTIVITY_BUTTON)).click()
         uiDevice.wait(Until.findObject(By.res(packageName, "incrementButton")), TIMEOUT).click()
 
-        val changedText = uiDevice.findObject(By.res(packageName, "totalCountDetailsTextView"))
-        Assert.assertEquals(changedText.text, "Number of results: 405")
+        val changedText = uiDevice.findObject(By.res(packageName, TEST_ID_TOTAL_COUNT_DETAILS_TEXTVIEW))
+        Assert.assertEquals(changedText.text, TEST_NUMBER_OF_RESULTS_FAKE_PLUS_1)
     }
 
     companion object {
