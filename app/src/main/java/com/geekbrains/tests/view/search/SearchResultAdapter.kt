@@ -42,6 +42,7 @@ internal class SearchResultAdapter : RecyclerView.Adapter<SearchResultViewHolder
 
         fun bind(searchResult: SearchResult) {
             itemView.repositoryName.text = searchResult.fullName
+            itemView.description.text = searchResult.description
         }
     }
 }

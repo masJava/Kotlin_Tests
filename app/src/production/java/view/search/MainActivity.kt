@@ -21,7 +21,7 @@ import java.util.*
 class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private val adapter = SearchResultAdapter()
-    private val presenter: PresenterSearchContract = SearchPresenter(createRepository())
+    private val presenter: PresenterSearchContract = SearchPresenter(this, createRepository())
     private var totalCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,15 +109,5 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     companion object {
         const val BASE_URL = "https://api.github.com"
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.onAttach(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenter.onDetach()
     }
 }

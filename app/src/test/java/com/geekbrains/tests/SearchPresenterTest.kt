@@ -30,20 +30,9 @@ class SearchPresenterTest {
         //Раньше было @RunWith(MockitoJUnitRunner.class) в аннотации к самому классу (SearchPresenterTest)
         MockitoAnnotations.initMocks(this)
         //Создаем Презентер, используя моки Репозитория и Вью, проинициализированные строкой выше
-        presenter = SearchPresenter(repository)
-        presenter.onAttach(viewContract)
+        presenter = SearchPresenter(viewContract, repository)
     }
 
-    @Test
-    fun onAttach_Test(){
-        assertTrue(presenter.viewIsAttached())
-    }
-
-    @Test
-    fun onDetach_Test(){
-        presenter.onDetach()
-        assertFalse(presenter.viewIsAttached())
-    }
 
     @Test //Проверим вызов метода searchGitHub() у нашего Репозитория
     fun searchGitHub_Test() {
